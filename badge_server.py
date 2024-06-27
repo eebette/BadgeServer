@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 import flask
 import pybadges
 
@@ -12,9 +13,9 @@ def serve_badge() -> flask.Response:
     :return: A flask response object with the requested badge
     """
     with open("/tests/bank_scrapers/bank_scrapers_tests.json") as json_file:
-        data = json.load(json_file)
+        tests: Dict = json.load(json_file)
 
-    b = data[flask.request.args.get("name")]
+    b: Dict = tests[flask.request.args.get("name")]
 
     badge: str = pybadges.badge(
         left_text=b["test_date"],
